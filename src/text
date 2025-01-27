@@ -1,0 +1,7 @@
+get api from gemini googel 
+API = AIzaSyBx7zKe1FM90lSI4o3eMapAC1pey35jvmE
+and add this api in config (gemini.js )
+
+Now go back to website  and get code in javascript 
+copy code and paste in config - gemini js 
+then install the package ===npm install @google/generative-ai
