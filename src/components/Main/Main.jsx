@@ -7,10 +7,19 @@ const Main = () => {
     return (
         <div className="main">
             <div className="nav">
+                
                 <p>Gemini</p>
                 <img src={assets.user_icon} alt="" />
 
             </div>
+        {/* // <div className="main">
+        // <div className="nav">
+        //   <div className="nav-left">
+        //     <img src={assets.menu_icon || "/placeholder.svg"} alt="Menu" className="menu-icon" />
+        //     <p>Gemini</p>
+        //   </div>
+        //   <img src={assets.user_icon || "/placeholder.svg"} alt="" />
+        // </div> */}
 
             {/* main container */}
 

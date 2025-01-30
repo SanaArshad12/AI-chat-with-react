@@ -9,11 +9,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 22px;
+    font-size: 27px;
     padding: 20px;
     color: #585858;
     background-color: #f6f8fa;
 }
+
+/* responsive */
+/* .main .nav .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  } */
+
+  .main .nav p {
+    margin-left: 30px;
+   
+    transition: margin-left 0.3s ease; /* Smooth transition for the margin change */
+  }
 
 .main .nav img{
     width: 40px;

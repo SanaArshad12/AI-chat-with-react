@@ -1,68 +1,62 @@
-import React, { useContext, useState } from 'react'
-import './Sidebar.css'
+import { useContext, useState } from "react"
+import "./Sidebar.css"
 import { assets } from "../../assets/assets"
-import { use } from 'react'
-import { Context } from '../../context/Context'
+import { Context } from "../../context/Context"
 
 const Sidebar = () => {
+  const [extended, setExtended] = useState(false)
+  const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context)
 
-    const [extended, setExtended] = useState(false)
-    const {onSent,prevPrompts,setRecentPrompt,newChat}=useContext(Context)
+  const loadPrompt = async (prompt) => {
+    setRecentPrompt(prompt)
+    await onSent(prompt)
+  }
 
-    
-    const loadPrompt=async(prompt)=>{
-        setRecentPrompt(prompt)
-        await onSent(prompt)
-    }
-    
-    return (
-        <div className="sidebar">
-            <div className="top">
-                {/* this prev or setExtended shows if the prev is true then it returns false and the value is store in entended */}
-                <img onClick={()=>setExtended(prev=>!prev)} className="menu" src={assets.menu_icon} alt="" />
-                <div onClick={()=>newChat()} className="new-chat">
-                    <img src={assets.plus_icon} alt="" />
-
-                    {extended ? <p>Start a new chat</p> : null}    {/* if extended is true then it will print para otherwise show null */}
-                </div>
-
-                {extended ?
-
-                    <div className="recent">
-                        <p className='recent-title'>Recent</p>
-                        {prevPrompts.map((item,index)=>{
-                            return(
-                        <div onClick={()=>loadPrompt(item)}className="recent-entry">
-                            <img src={assets.message_icon} alt="" />
-                            <p>{item.slice(0,18)}.. </p>
-                        </div>
-
-                            )
-                        })}
-                    </div>
-                    : null
-                }
-
-            </div>
-
-            <div className="bottom">
-                <div className="bottom-item recent-entry">
-                    <img src={assets.question_icon} alt="" />
-                  {extended?   <p>Help</p>:null}
-                </div>
-                <div className="bottom-item recent-entry">
-                    <img src={assets.history_icon} alt="" />
-                    {extended?   <p>Activity</p>:null}
-                </div>
-                <div className="bottom-item recent-entry">
-                    <img src={assets.setting_icon} alt="" />
-                    {extended?   <p>Settings</p>:null}
-                </div>
-
-            </div>
-
+  return (
+    <div className={`sidebar ${extended ? "extended" : ""}`}>
+      <div className="top">
+        <img
+          onClick={() => setExtended((prev) => !prev)}
+          className="menu"
+          src={assets.menu_icon || "/placeholder.svg"}
+          alt="Menu"
+          style={{ display: "block", width: "20px", height: "20px" }}
+        />
+        <div onClick={() => newChat()} className="new-chat">
+          <img src={assets.plus_icon || "/placeholder.svg"} alt="" />
+          {extended ? <p>Start a new chat</p> : null}
         </div>
-    )
+
+        {extended && (
+          <div className="recent">
+            <p className="recent-title">Recent</p>
+            {prevPrompts.map((item, index) => (
+              <div key={index} onClick={() => loadPrompt(item)} className="recent-entry">
+                <img src={assets.message_icon || "/placeholder.svg"} alt="" />
+                <p>{item.slice(0, 18)}.. </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="bottom">
+        <div className="bottom-item recent-entry">
+          <img src={assets.question_icon || "/placeholder.svg"} alt="" />
+          {extended && <p>Help</p>}
+        </div>
+        <div className="bottom-item recent-entry">
+          <img src={assets.history_icon || "/placeholder.svg"} alt="" />
+          {extended && <p>Activity</p>}
+        </div>
+        <div className="bottom-item recent-entry">
+          <img src={assets.setting_icon || "/placeholder.svg"} alt="" />
+          {extended && <p>Settings</p>}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Sidebar
+
